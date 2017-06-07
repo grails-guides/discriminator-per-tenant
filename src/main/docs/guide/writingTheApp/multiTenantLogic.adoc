@@ -1,0 +1,42 @@
+GORM features a set of
+link:{gormapi}/grails/gorm/multitenancy/package-summary.html[Multi-Tenancy transformations]
+which facilitate the resolution of the tenant and the binding of a Hibernate Session
+for that particular tenant in the scope of a method.
+
+.Multi Tenancy Transformations
+|===
+| Type | Description
+
+|link:{gormapi}/grails/gorm/multitenancy/CurrentTenant.html[CurrentTenant]
+|Resolves the current tenant and binds a Hibernate session for the scope of the method
+
+|link:{gormapi}/grails/gorm/multitenancy/Tenant.html[Tenant]
+|Resolves a specific tenant and binds a Hibernate session for the scope of the method
+
+|link:{gormapi}/grails/gorm/multitenancy/WithoutTenant.html[WithoutTenant]
+|Execute some logic within a method without a tenant present
+
+|===
+
+These should generally be applied to services in a Grails application and they
+work really well when combined with the link:{gormdocs}#dataServices[GORM Data Services]
+concept introduced in GORM 6.1.
+
+To implement the logic to save and retrieve `Vehicle` instances create a new  +
+`grails-app/services/example/VehicleService.groovy`
+file and annotate it within the link:{gormapi}/grails/gorm/multitenancy/CurrentTenant.html[CurrentTenant]
+and link:{gormapi}/grails/gorm/services/Service.html[Service] annotations:
+
+[source, groovy]
+.grails-app/services/example/VehicleService.groovy
+----
+include::{sourcedir}/grails-app/services/example/VehicleService.groovy[tags=class, indent=0]
+}
+----
+<1> The link:{gormapi}/grails/gorm/services/Service.html[Service] transformation will ensure any abstract methods that can be implemented by GORM are implemented
+<2> The link:{gormapi}/grails/gorm/multitenancy/CurrentTenant.html[CurrentTenant] transformation will ensure any method that is executed on the service resolves the current tenant first and binds a Hibernate session.
+
+NOTE: The class is `abstract` because many of the methods will be implemented for you by GORM.
+
+
+Now lets take a look at how to implement querying logic for a Multi-Tenant application.
