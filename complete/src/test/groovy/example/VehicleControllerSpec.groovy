@@ -5,11 +5,8 @@ import grails.test.mixin.TestFor
 import org.grails.datastore.mapping.config.Settings
 import org.grails.datastore.mapping.multitenancy.exceptions.TenantNotFoundException
 import org.grails.datastore.mapping.multitenancy.resolvers.SystemPropertyTenantResolver
-import spock.lang.Ignore
-import spock.lang.Stepwise
 
 // tag::class[]
-@Stepwise
 @TestFor(VehicleController)
 class VehicleControllerSpec extends HibernateSpec {
 // end::class[]
@@ -81,34 +78,21 @@ class VehicleControllerSpec extends HibernateSpec {
         view == 'create'
 
         when: 'The save action is executed with a valid instance'
-        response.reset()
         controller.save('A5', 2011)
 
         then: 'A redirect is issued to the show action'
         controller.flash.message != null
         vehicleService.count() == 1
         response.redirectedUrl == '/vehicles/1'
-    }
-    // end::save[]
-
-    @Ignore
-    void 'Test that the show action returns 404 for an invalid id'() {
-        expect:
-        vehicleService.count() == 1
 
         when: 'The show action is executed with a null domain'
         controller.show(null)
 
         then: 'A 404 error is returned'
         response.status == 404
-    }
-
-    @Ignore
-    void 'Test the update action performs an update on a valid domain instance'() {
-        expect:
-        vehicleService.count() == 1
 
         when: 'Update is called for a domain instance that doesn\'t exist'
+        response.reset()
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
         controller.update(999, 'A5', 2011)
@@ -132,14 +116,9 @@ class VehicleControllerSpec extends HibernateSpec {
         then: 'A redirect is issued to the show action'
         response.redirectedUrl == '/vehicles/1'
         flash.message != null
-    }
-
-    @Ignore
-    void 'Test that the delete action deletes an instance if it exists'() {
-        expect:
-        vehicleService.count() == 1
 
         when: 'The delete action is called for a null instance'
+        response.reset()
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'DELETE'
         controller.delete(null)
