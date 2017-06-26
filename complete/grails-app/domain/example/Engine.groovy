@@ -5,7 +5,6 @@ import grails.gorm.MultiTenant
 class Engine implements MultiTenant<Engine> { // <1>
     Integer cylinders
     String manufacturer  // <2>
-    static belongsTo = [vehicle: Vehicle]
 
     static constraints = {
         cylinders nullable: false
