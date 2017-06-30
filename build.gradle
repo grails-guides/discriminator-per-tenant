@@ -9,3 +9,4 @@ asciidoctorj {
 apply from:"https://raw.githubusercontent.com/grails/grails-guides/master/gradle/guide-build.gradle"
 
 // this is a test
+// this is another test
