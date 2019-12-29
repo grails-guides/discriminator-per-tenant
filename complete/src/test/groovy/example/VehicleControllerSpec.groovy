@@ -1,6 +1,5 @@
 package example
 
-import grails.test.hibernate.HibernateSpec
 import grails.testing.web.controllers.ControllerUnitTest
 import org.grails.datastore.mapping.config.Settings
 import org.grails.datastore.mapping.multitenancy.exceptions.TenantNotFoundException
