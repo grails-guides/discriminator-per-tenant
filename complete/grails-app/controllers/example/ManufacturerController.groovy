@@ -13,20 +13,19 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class ManufacturerController {
 // end::classDeclaration[]
+    ManufacturerService manufacturerService
 
     // tag::index[]
     @ReadOnly
     def index() {
-        render view: '/index', model: [manufacturers: Manufacturer.list()]
+        render view: '/index', model: [manufacturers: manufacturerService.findAll()]
     }
     // end::index[]
 
     // tag::select[]
     @ReadOnly
     def select(String id) {
-        Manufacturer m = Manufacturer.where {
-            name == id
-        }.first() // <1>
+        Manufacturer m = manufacturerService.findByName(id) // <1>
         if ( m ) {
             session.setAttribute(SessionTenantResolver.ATTRIBUTE, m.name.toLowerCase()) // <2>
             redirect controller: 'vehicle' // <3>
