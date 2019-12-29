@@ -15,48 +15,64 @@ class TenantSelectionFuncSpec extends GebSpec {
         at ManufacturersPage
 
         when:
-        selectAudi()
+        ManufacturersPage page = browser.page(ManufacturersPage)
+        page.selectAudi()
 
         then:
         at VehiclesPage
 
         when:
-        newVehicle()
+        VehiclesPage vehiclesPage = browser.page(VehiclesPage)
+        vehiclesPage.newVehicle()
 
         then:
         at NewVehiclePage
 
         when:
-        newVehicle('A5', 2000)
+        NewVehiclePage newVehiclePage = browser.page(NewVehiclePage)
+        newVehiclePage.newVehicle('A5', 2000)
 
         then:
         at ShowVehiclePage
 
         when:
-        vehicleList()
+        ShowVehiclePage showVehiclePage = browser.page(ShowVehiclePage)
+        showVehiclePage.vehicleList()
 
         then:
         at VehiclesPage
-        numberOfVehicles() == 1
 
         when:
-        newVehicle()
+        vehiclesPage = browser.page(VehiclesPage)
+
+        then:
+        vehiclesPage.numberOfVehicles() == 1
+
+        when:
+        vehiclesPage.newVehicle()
 
         then:
         at NewVehiclePage
 
         when:
-        newVehicle('A3', 2001)
+        newVehiclePage = browser.page(NewVehiclePage)
+        newVehiclePage.newVehicle('A3', 2001)
 
         then:
         at ShowVehiclePage
 
         when:
-        vehicleList()
+        showVehiclePage = browser.page(ShowVehiclePage)
+        showVehiclePage.vehicleList()
 
         then:
         at VehiclesPage
-        numberOfVehicles() == 2
+
+        when:
+        vehiclesPage = browser.page(VehiclesPage)
+
+        then:
+        vehiclesPage.numberOfVehicles() == 2
 
         when:
         go '/'
@@ -65,29 +81,38 @@ class TenantSelectionFuncSpec extends GebSpec {
         at ManufacturersPage
 
         when:
-        selectFord()
+        ManufacturersPage manufacturersPage = browser.page(ManufacturersPage)
+        manufacturersPage.selectFord()
 
         then:
         at VehiclesPage
 
         when:
-        newVehicle()
+        vehiclesPage = browser.page(VehiclesPage)
+        vehiclesPage.newVehicle()
 
         then:
         at NewVehiclePage
 
         when:
-        newVehicle('KA', 1996)
+        newVehiclePage = browser.page(NewVehiclePage)
+        newVehiclePage.newVehicle('KA', 1996)
 
         then:
         at ShowVehiclePage
 
         when:
-        vehicleList()
+        showVehiclePage = browser.page(ShowVehiclePage)
+        showVehiclePage.vehicleList()
 
         then:
         at VehiclesPage
-        numberOfVehicles() == 1
+
+        when:
+        vehiclesPage = browser.page(VehiclesPage)
+
+        then:
+        vehiclesPage.numberOfVehicles() == 1
     }
 
 }
