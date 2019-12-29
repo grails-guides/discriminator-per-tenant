@@ -13,7 +13,7 @@ class VehicleControllerSpec extends HibernateSpec implements ControllerUnitTest<
     // tag::config[]
     @Override
     Map getConfiguration() {
-        [(Settings.SETTING_MULTI_TENANT_RESOLVER_CLASS): SystemPropertyTenantResolver]
+        super.getConfiguration() + [(Settings.SETTING_MULTI_TENANT_RESOLVER_CLASS): SystemPropertyTenantResolver]
     }
     // end::config[]
 
