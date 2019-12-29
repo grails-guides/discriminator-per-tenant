@@ -3,9 +3,6 @@ grails:
     profile: web
     codegen:
         defaultPackage: database.per.tenant
-    spring:
-        transactionManagement:
-            proxies: false
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
