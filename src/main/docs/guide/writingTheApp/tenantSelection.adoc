@@ -2,7 +2,16 @@ The first step to supporting Multi-Tenancy in your application is implementing s
 
 To keep things simple for the example we are going to implement a simple mechanism that provides a UI to store the `tenantId` within the users HTTP session.
 
-First create a new `ManufacturerController` use `create-controller` or your preferred IDE:
+
+First, create a GORM Data service to `Manufacturer`:
+
+[source, groovy]
+.grails-app/controllers/example/ManufacturerService.groovy
+----
+include::{sourcedir}/grails-app/init/example/ManufacturerService.groovy[]
+----
+
+Then, create a new `ManufacturerController` use `create-controller` or your preferred IDE:
 
 [source,bash]
 ----
