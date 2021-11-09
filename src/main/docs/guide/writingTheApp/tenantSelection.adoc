@@ -8,7 +8,7 @@ First, create a GORM Data service to `Manufacturer`:
 [source, groovy]
 .grails-app/controllers/example/ManufacturerService.groovy
 ----
-include::{sourcedir}/grails-app/init/example/ManufacturerService.groovy[]
+include::{sourcedir}/grails-app/services/example/ManufacturerService.groovy[]
 ----
 
 Then, create a new `ManufacturerController` use `create-controller` or your preferred IDE:
