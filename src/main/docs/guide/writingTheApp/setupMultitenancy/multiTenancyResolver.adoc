@@ -1,3 +1,0 @@
-include::{commondir}/common-tenantresolver.adoc[]
-
-For this example we are going to be using `SessionTenantResolver` and storing the tenant id within the current user session.
